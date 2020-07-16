@@ -12,43 +12,29 @@
     <title>Song Confirmation</title>
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="#">Song-ify</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav">
-            <li class="nav-item active">
-                <a class="nav-link" th:href="@{/songform}">New Song<span class="sr-only">(current)</span></a>
-            </li>
-        </ul>
-    </div>
-</nav>
+
+<div th:replace="songform :: navLinks"></div>
 <h1>Song Confirmation</h1>
 
-<p th:inline="text">
-    ID: [[${song.id}]] <br>
-    Name: [[${song.name}]] <br>
-    Artist: [[${song.artist}]] <br>
-    Album: [[${song.album}]] <br>
+<h2>All Songs</h2>
+<div th:each="song : ${allSongs}">
+    <p>ID: [[${song.id}]] <br>
+        Name: [[${song.name}]] <br>
+        Artist: [[${song.artist}]] <br>
+        Album: [[${song.album}]]<br>
+        Rating: [[${song.rating}]]<br>
+        <span th:if="${song.rating} > 6">Good</span>
+        <span th:unless="${song.rating} > 6">Bad</span>
+        <br>
+
+        Year: [[${song.year}]] <br>
+        Genre: [[${song.genre}]] <br>
+        Available: [[${song.inStock}]]<br>
+        <span th:text="${song.inStock}? 'pick up today':'ship to home'"></span>
+    </p>
 
 
-    Rating: [[${song.rating}]]<br>
-    <span th:if="${song.rating} > 6">Good</span>
-    <span th:unless="${song.rating} > 6">Bad</span>
-    <br>
-
-
-
-    Year: [[${song.year}]] <br>
-    Genre: [[${song.genre}]] <br>
-
-    Available: [[${song.inStock}]]<br>
-    <span th:text="${song.inStock}? 'pick up today':'ship to home'"></span>
-
-
-</p>
+</div>
 
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
